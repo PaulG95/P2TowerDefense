@@ -12,6 +12,8 @@ public class Values {
 	static final int FRAME_HEIGHT = 700;
 	
 	static final int FIELD_SIZE = 30;
+	static final int AMOUNT_OF_XFIELDS = 20;
+	static final int AMOUNT_OF_YFIELDS = 20;
 	
 	static final int ENEMY_START_X = 3;
 	static final int ENEMY_START_Y = 0;	

@@ -2,6 +2,7 @@ package TowerDefense;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel {
 	private ArrayList<Tower> towers;
 	private ArrayList<Bullet> bullets;
 	private Field[][] field;
+	private Rectangle hoveredField;
 	
 	public GamePanel(Field[][] field)
 	{
@@ -35,13 +37,6 @@ public class GamePanel extends JPanel {
 				g.fillRect(e.getXPos(), e.getYPos(), e.getEnemy().width, e.getEnemy().height);
 			}
 		}
-		if(towers != null)
-		{
-			for(Tower t: towers)
-			{
-				g.fillRect(field[t.getX()][t.getY()].getXPos(), field[t.getX()][t.getY()].getYPos(), t.getSize(), t.getSize());
-			}
-		}
 		
 		g.setColor(Color.RED);
 		if(bullets != null)
@@ -51,6 +46,21 @@ public class GamePanel extends JPanel {
 				g.fillRect(b.getX(), b.getY(), b.getBullet().width, b.getBullet().height);
 			}
 		}	
+		
+		g.setColor(Color.DARK_GRAY);
+		if(towers != null)
+		{
+			for(Tower t: towers)
+			{
+				g.fillRect(t.getX(), t.getY(), t.getSize(), t.getSize());
+			}
+		}
+		
+		g.setColor(Color.CYAN);
+		if(hoveredField != null)
+		{
+			g.fillRect(hoveredField.x, hoveredField.y, hoveredField.width, hoveredField.height);
+		}
 	}
 	
 	public void setTowers(ArrayList<Tower> towers)
@@ -75,4 +85,8 @@ public class GamePanel extends JPanel {
 			this.bullets.add(b);
 		}
 	}	
+	
+	public void setHoveredField(Rectangle field){
+		this.hoveredField = field;
+	}
 }

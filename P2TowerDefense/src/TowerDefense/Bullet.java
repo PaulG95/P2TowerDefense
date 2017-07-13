@@ -10,32 +10,30 @@ import java.awt.Rectangle;
 
 public class Bullet 
 {	
-	private Field[][] field;
 	private Rectangle bullet;
 	private Enemy enemy;
 	private Tower tower;
 	private int speed, size, x,y, damage;
 	private boolean isMoving;
+	
 	/**
 	 * A bullet is created with a tower, that it belongs to
 	 * and an instance of the gameField
 	 * @param tower is the tower that the bullet belongs to
 	 * @param field
 	 */
-	public Bullet(Tower tower, Field[][] field)
+	public Bullet(Tower tower)
 	{
-		this.field = field;		
 		this.tower = tower;
 		
 		damage = tower.getDamage();
 		speed = 1;
 		size = 8;
-		x = field[tower.getX()][tower.getY()].getXPos();
-		y = field[tower.getX()][tower.getY()].getYPos();;
+		x = tower.getX();
+		y = tower.getY();
+		bullet = new Rectangle(x,y,size,size);	
 		
 		isMoving = false;
-		
-		bullet = new Rectangle(x,y,size,size);	
 	}
 	
 	/**
@@ -102,8 +100,8 @@ public class Bullet
 	 * sets the bullet's target to null
 	 */
 	public void reset(){
-		setX(field[tower.getX()][tower.getY()].getXPos());
-		setY(field[tower.getX()][tower.getY()].getYPos());
+		setX(this.tower.getX());
+		setY(this.tower.getY());
 		isMoving = false;
 		enemy = null;
 	}

@@ -1,8 +1,7 @@
 package TowerDefense;
 
-import java.awt.Dimension;
+import java.awt.Rectangle;
 
-import javax.swing.JPanel;
 /**
  * This class represents one Field of the Game.
  * It has an Position and can be occupied.
@@ -12,6 +11,7 @@ import javax.swing.JPanel;
  */
 public class Field 
 {
+	private Rectangle field;
 	private boolean occupied;
 	private int  xPos,yPos;	
 	/**
@@ -24,6 +24,11 @@ public class Field
 		occupied = false;	
 		this.xPos = xPos;
 		this.yPos = yPos;
+		field = new Rectangle(xPos,yPos,Values.FIELD_SIZE,Values.FIELD_SIZE);
+	}
+	
+	public Rectangle getField(){
+		return field;
 	}
 	
 	/**

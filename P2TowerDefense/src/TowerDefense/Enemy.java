@@ -24,7 +24,7 @@ public class Enemy
 	{
 		this.field = field;
 	
-		hitpoints = 4;
+		hitpoints = 20;
 		size = 10;
 		
 		x = Values.ENEMY_START_X;				//Position im Raster

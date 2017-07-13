@@ -28,7 +28,7 @@ public class EnemyController {
 		Enemy enemy = new Enemy(field);
 		enemys.add(enemy);
 		
-		Timer enemyTimer = new Timer(10,e->{
+		Timer enemyTimer = new Timer(40,e->{
 			if(enemy.getEnemy().y<700)
 			{
 				enemy.move();

@@ -12,12 +12,11 @@ public class Tower {
 	
 	private int range; 
 	private int damage;	
-	private int x,y, xPos,yPos, size;
+	private int activeBullet;
+	private int x,y,midX,midY,size;
 	private Enemy target;
-	private Field[][] field;
 	private ArrayList<Enemy> enemys;
 	private ArrayList<Bullet> bullets;
-	private int activeBullet;
 	private boolean inRange;
 	
 	/**
@@ -26,27 +25,26 @@ public class Tower {
 	 * of all the enemies
 	 * @param x defines the position on the x-axis
 	 * @param y defines the position on the y-axis
-	 * @param field
 	 * @param enemys
 	 */
-	public Tower(int x, int y, Field[][] field, ArrayList<Enemy> enemys){
-		
+	
+	public Tower(int x, int y, ArrayList<Enemy> enemys)
+	{
 		this.bullets = new ArrayList<>();
 		this.enemys = enemys;
-		this.field = field;
 		this.size = Values.FIELD_SIZE;
-		this.x = x;
-		this.y = y;
-			
+		
 		inRange = false;
 		range = 150;
 		damage = 1;
 		
-		xPos = field[x][y].getXPos();
-		yPos = field[x][y].getYPos();
+		this.x = x;
+		this.y = y;
+		this.midX = x+Values.FIELD_SIZE/2;
+		this.midY = y+Values.FIELD_SIZE/2;
 		
 		for(int i=0; i<20; i++){
-			Bullet bullet = new Bullet(this,field);			//20 Bullets erstellen
+			Bullet bullet = new Bullet(this);			//20 Bullets erstellen
 			bullets.add(bullet);							//und dem Array hinzufügen
 		}
 		activeBullet = 0;
@@ -57,15 +55,12 @@ public class Tower {
 	 * @return Returns true if there is an enemy in range.
 	 */
 	public boolean checkRange(){
-		int midX = field[x][y].getXPos()+Values.FIELD_SIZE/2;
-		int midY = field[x][y].getYPos()+Values.FIELD_SIZE/2;
 		inRange = false;
 		
 		for(Enemy e: enemys){
-			
-			if(xPos-range<e.getXPos()&&xPos+range>e.getXPos())
+			if(midX-range < e.getXPos() && midX+range > e.getXPos())
 			{
-				if(yPos-range<e.getYPos()&&yPos+range>e.getYPos())
+				if(midY-range < e.getYPos() && midY+range > e.getYPos())
 				{
 					inRange=true;
 					setTarget(e);
@@ -107,7 +102,7 @@ public class Tower {
 	}
 
 	/**
-	 * @return Returns this tower's horizontal positions in the grid of the gamefield
+	 * @return Returns this tower's position on the x-Axis
 	 */
 	public int getX() {
 		return x;
@@ -122,7 +117,7 @@ public class Tower {
 	}
 
 	/**
-	 * @return Returns this tower's vertical positions in the grid of the gamefield
+	 * @return Returns this tower's position on the y-Axis
 	 */
 	public int getY() {
 		return y;

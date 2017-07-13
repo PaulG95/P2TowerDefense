@@ -13,6 +13,7 @@ public class TowerController {
 	
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> enemys;
+	private GamePanel gamePanel;
 	/**
 	 * The TowerController is created with everything he needs
 	 * to control the towers
@@ -23,28 +24,19 @@ public class TowerController {
 	 */
 	public TowerController(View view, Field[][] field, ArrayList<Tower> towers, ArrayList<Enemy> enemys)
 	{
-		GamePanel gamePanel = view.getGamePanel();
+		this.gamePanel = view.getGamePanel();
 		this.towers = towers;
 		this.enemys = enemys;
 		gamePanel.setTowers(towers);
-		
-		Tower tower0 = new Tower(7,4, field, enemys);
-		Tower tower1 = new Tower(1,11,field, enemys);
-		
-		towers.add(tower0);
-		towers.add(tower1);
-		
-		gamePanel.setBullets(tower0.getBullets());
-		gamePanel.addBullets(tower1.getBullets());
-		
-		Timer towerTimer = new Timer(1000,e->															//TOWER-TIMER
+
+		Timer towerTimer = new Timer(1000,e->												//TOWER-TIMER
 		{
-			for(Tower t: towers){															//Alle Tower in der ArrayList durchgehen 
+			for(Tower t: towers){															//Alle existierenden Tower durchgehen 
 				if(t.checkRange())															//Kontrollieren ob Gegner in Reichweite ist
 				{
-					if(t.getActiveBullet() == 19) t.setActiveBullet(0);						//counter für die einzelnen Bullets bei Bedarf zuruecks.
-					else t.setActiveBullet(t.getActiveBullet()+1);							//sonst Counter eins hochzählen
-					t.getBullets().get(t.getActiveBullet()).setEnemy(t.getTarget());		//Bullet den Enemy übergeben
+					if(t.getActiveBullet() == 19) t.setActiveBullet(0);						//counter für die activeBullet bei Bedarf zuruecks.
+					else t.setActiveBullet(t.getActiveBullet()+1);							//sonst activeBullet eins hochzählen
+					t.getBullets().get(t.getActiveBullet()).setEnemy(t.getTarget());		//Bullet den Enemy als Ziel übergeben
 					t.getBullets().get(t.getActiveBullet()).startMoving();					//Bullet beweglich machen
 				}
 			}
@@ -53,4 +45,17 @@ public class TowerController {
 		towerTimer.start();
 	}
 	
+	public void newTower(int x, int y)
+	{
+		Tower tower = new Tower(x,y,enemys);
+		if(!towers.isEmpty())
+		{
+			this.gamePanel.addBullets(tower.getBullets());		
+		}
+		else 
+		{
+			this.gamePanel.setBullets(tower.getBullets());
+		}
+		towers.add(tower);
+	}
 }

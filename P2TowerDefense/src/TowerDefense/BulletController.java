@@ -29,26 +29,25 @@ public class BulletController {
 		
 		
 		Timer bulletTimer = new Timer(20,e->{															//Bullet-Timer	
-			for(Tower t: towers)
+			for(Tower t: towers)																		//alle existieren Tower durchgehen
 			{
-				for(Bullet b: t.getBullets())
-				{										//jede Bullet durchgehen
-					if(b.isMoving())														//wenn die Bullet beweglich ist	
+				for(Bullet b: t.getBullets())															//alle existierenden Bullets des jeweiligen
+				{																						//Turmes durchgehen
+					if(b.isMoving())																	//wenn die Bullet sich gerade bewegt	
 					{
-						b.moveBullet();														//Bullet bewegen
-						gamePanel.repaint();
+						b.moveBullet();																	//Bullet fortbewegen
+						gamePanel.repaint();															//GamePanel updated
 						
-						if(b.getX() == b.getEnemy().getXPos() && b.getY() == b.getEnemy().getYPos())			//Wenn Bullet und Enemy kollidieren
+						if(b.getX() == b.getEnemy().getXPos() && b.getY() == b.getEnemy().getYPos())	//Wenn Bullet und Enemy kollidieren
 						{
-							if(b.getEnemy().getHitpoints()- b.getDamage() <= 0)						//wenn Enemy kein Leben mehr hat
+							if(b.getEnemy().getHitpoints()- b.getDamage() <= 0)							//und wenn Enemy kein Leben mehr hat
 							{
-								b.getEnemy().killed();													//Enemy töten	
-								b.reset();														//Bullet zurücksetzten
+								b.getEnemy().killed();													//dann Enemy töten	
 							}
 							else{
-								b.getEnemy().setHitpoints(b.getEnemy().getHitpoints()-b.getDamage());			//wenn Enemy noch Leben hat Hitpoint aktualisieren
-								b.reset();														//Bullet zurücksetzen
+								b.getEnemy().setHitpoints(b.getEnemy().getHitpoints()-b.getDamage());	//wenn Enemy noch lebt, Hitpoints aktualisieren
 							}
+							b.reset();
 						}
 					}
 				}
