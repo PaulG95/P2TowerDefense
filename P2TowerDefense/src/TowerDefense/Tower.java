@@ -52,6 +52,10 @@ public class Tower {
 		activeBullet = 0;
 	}
 		
+	/**
+	 * Checks if there is an enemy in shooting range of this tower.
+	 * @return Returns true if there is an enemy in range.
+	 */
 	public boolean checkRange(){
 		int midX = field[x][y].getXPos()+Values.FIELD_SIZE/2;
 		int midY = field[x][y].getYPos()+Values.FIELD_SIZE/2;
@@ -72,54 +76,91 @@ public class Tower {
 		return inRange;
 	}
 	
+	/**
+	 * Sets an enemy as a new target of this tower
+	 * @param enemy Is the enemy which is the new target
+	 */
 	public void setTarget(Enemy enemy){
 		target = enemy;
 	}
 	
+	/**
+	 * @return Returns the enemy which is the current target of this tower
+	 */
 	public Enemy getTarget() {
 		return target;
 	}
 	
+	/**
+	 * @return Returns the value of the damage that this tower deals
+	 */
 	public int getDamage() {
 		return damage;
 	}
 
+	/**
+	 * sets a new value for the damage of this tower
+	 * @param damage is the new damage value
+	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 
+	/**
+	 * @return Returns this tower's horizontal positions in the grid of the gamefield
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Sets this tower's horizontal position in the grid
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * @return Returns this tower's vertical positions in the grid of the gamefield
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * Sets this tower's vertical position in the grid
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * @return Returns the size of this tower
+	 */
 	public int getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
-	}
-
+	/**
+	 * @return Returns an ArrayList of all the bullets which belong to this tower
+	 */
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
 
+	/**
+	 * @return Returns the number of the currently active bullet.
+	 */
 	public int getActiveBullet() {
 		return activeBullet;
 	}
 
+	/**
+	 * Sets the number of the active Bullet
+	 * @param activeBullet
+	 */
 	public void setActiveBullet(int activeBullet) {
 		this.activeBullet = activeBullet;
 	}

@@ -26,21 +26,33 @@ public class Field
 		this.yPos = yPos;
 	}
 	
+	/**
+	 * @return Returns this Field's position on the x-Axis
+	 */
 	public int getXPos() 
 	{
 		return xPos;
 	}
 
+	/**
+	 * @return Returns this Field's position on the y-Axis
+	 */
 	public int getYPos() 
 	{
 		return yPos;
 	}
 
+	/**
+	 * @return Returns true if this Field is occupied
+	 */
 	public boolean isOccupied() 
 	{
 		return occupied;
 	}
 	
+	/**
+	 * sets this Field's status to occupied
+	 */
 	public void setOccupied() 
 	{
 		this.occupied = true;
