@@ -1,6 +1,12 @@
 package TowerDefense;
 
 import java.util.ArrayList;
+/**
+ * This class represents a Tower with main attributes like range,
+ * damage, a position, and an ArrayList of bullets.
+ * It also has an instance of all the enemies.
+ * @author Bettina 
+ */
 
 public class Tower {
 	
@@ -10,23 +16,40 @@ public class Tower {
 	private Enemy target;
 	private Field[][] field;
 	private ArrayList<Enemy> enemys;
+	private ArrayList<Bullet> bullets;
+	private int activeBullet;
 	private boolean inRange;
 	
-	
+	/**
+	 * A Tower is created with an exact position,
+	 * an instance of the gamefield and a list
+	 * of all the enemies
+	 * @param x defines the position on the x-axis
+	 * @param y defines the position on the y-axis
+	 * @param field
+	 * @param enemys
+	 */
 	public Tower(int x, int y, Field[][] field, ArrayList<Enemy> enemys){
 		
+		this.bullets = new ArrayList<>();
 		this.enemys = enemys;
 		this.field = field;
 		this.size = Values.FIELD_SIZE;
 		this.x = x;
 		this.y = y;
-				
+			
 		inRange = false;
 		range = 150;
 		damage = 1;
 		
 		xPos = field[x][y].getXPos();
-		yPos = field[x][y].getYPos();	
+		yPos = field[x][y].getYPos();
+		
+		for(int i=0; i<20; i++){
+			Bullet bullet = new Bullet(this,field);			//20 Bullets erstellen
+			bullets.add(bullet);							//und dem Array hinzufügen
+		}
+		activeBullet = 0;
 	}
 		
 	public boolean checkRange(){
@@ -87,5 +110,17 @@ public class Tower {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
+
+	public int getActiveBullet() {
+		return activeBullet;
+	}
+
+	public void setActiveBullet(int activeBullet) {
+		this.activeBullet = activeBullet;
 	}
 }

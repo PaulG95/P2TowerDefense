@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-
+/**
+ * This class represents the GamePanel which is painting 
+ * all the models.
+ * @author Bettina
+ *
+ */
 public class GamePanel extends JPanel {
 
 	private ArrayList<Enemy> enemys;
@@ -61,5 +66,13 @@ public class GamePanel extends JPanel {
 	public void setBullets(ArrayList<Bullet> bullets)
 	{
 		this.bullets = bullets;
+	}
+	
+	public void addBullets(ArrayList<Bullet> bullets)
+	{
+		for(Bullet b: bullets)
+		{
+			this.bullets.add(b);
+		}
 	}	
 }

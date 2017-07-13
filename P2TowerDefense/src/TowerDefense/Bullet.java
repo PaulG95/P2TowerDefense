@@ -1,21 +1,30 @@
 package TowerDefense;
 
 import java.awt.Rectangle;
+/**
+ * This class represents a Bullet with main attributes
+ * like speed, size and damage.
+ * It also has an instance of all enemies 
+ * @author Bettina
+ */
 
 public class Bullet 
-{
-	
+{	
 	private Field[][] field;
 	private Rectangle bullet;
 	private Enemy enemy;
 	private Tower tower;
 	private int speed, size, x,y, damage;
 	private boolean isMoving;
-	
-	public Bullet(Enemy enemy, Tower tower, Field[][] field)
+	/**
+	 * A bullet is created with a tower, that it belongs to
+	 * and an instance of the gameField
+	 * @param tower is the tower that the bullet belongs to
+	 * @param field
+	 */
+	public Bullet(Tower tower, Field[][] field)
 	{
 		this.field = field;		
-		this.enemy = enemy;
 		this.tower = tower;
 		
 		damage = tower.getDamage();
@@ -35,6 +44,10 @@ public class Bullet
 	
 	public void setEnemy(Enemy enemy){
 		this.enemy = enemy;
+	}
+	
+	public Enemy getEnemy(){
+		return this.enemy;
 	}
 	
 	public void startMoving(){

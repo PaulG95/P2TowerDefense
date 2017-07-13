@@ -1,5 +1,11 @@
 package TowerDefense;
-
+/**
+ * This class creates a gamefield out of
+ * many Field and initializes all the classes
+ * needed at the start of the game.
+ * @author Bettina
+ *
+ */
 public class TowerDefenseMain {
 
 	public static void main(String[] args) 

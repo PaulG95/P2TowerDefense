@@ -1,5 +1,11 @@
 package TowerDefense;
-
+/**
+ * This class contains all the static Values, such as
+ * the size of the frame and the starting point of the
+ * enemies.
+ * @author Bettina
+ *
+ */
 public class Values {
 
 	static final int FRAME_WIDTH = 1000;
