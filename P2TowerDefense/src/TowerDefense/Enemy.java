@@ -52,6 +52,10 @@ public class Enemy
 	 */
 	public void move(){
 		setYPos(getYPos()+1);
+//		int[] enemyPath = new int[70];
+//		for (int i=0; i<enemyPath.length; i++){
+//			enemyPath [i] = i+1;
+//		}
 	}
 	
 	/**
