@@ -10,6 +10,10 @@ import javax.swing.Timer;
  *
  */
 public class EnemyController {
+	
+	int counter;
+	Enemy eny1,eny2;
+	
 	/**
 	 * The Enemy is created with everything that he needs to 
 	 * control the enemies
@@ -26,6 +30,16 @@ public class EnemyController {
 		enemys.add(enemy);
 		
 		Timer enemyTimer = new Timer(40,l->{
+			if(counter == 4000)
+			{
+				eny1 = new Fighter(field);
+				enemys.add(eny1);
+			}
+			else if(counter == 8000)
+			{
+				eny2 = new Tank(field);
+				enemys.add(eny2);
+			}
 			for(Enemy e: enemys)
 			{
 				if(e.getEnemy().y<700)
@@ -34,6 +48,7 @@ public class EnemyController {
 				}
 			}
 			gamePanel.repaint();
+			counter+=40;
 		});
 		
 		enemyTimer.start();

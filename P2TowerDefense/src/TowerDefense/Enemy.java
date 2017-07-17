@@ -16,8 +16,8 @@ public class Enemy
 	private int gold;
 	private int x,y;
 	private int xPos,yPos;
-	private int size;
 	private Field field[][];
+	
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
@@ -62,12 +62,16 @@ public class Enemy
 		return enemy;
 	}
 	
+	/**
+	 * creates the rectangle that represents the enemy
+	 * @param size Is the side length of this enemy
+	 */
 	public void setEnemy(int size){
 		this.enemy = new Rectangle(xPos,yPos,size,size);
 	}
 	
 	/**
-	 * @return Returns the current hitpoint of the enemy
+	 * @return Returns the current hitpoints of the enemy
 	 */
 	public int getHitpoints() {
 		return hitpoints;
@@ -81,18 +85,32 @@ public class Enemy
 		this.hitpoints = hitpoints;
 	}
 	
+	/**
+	 * @return Returns the amount of gold that this enemy is worth
+	 */
 	public int getGold() {
 		return gold;
 	}
 	
+	/**
+	 * sets the amount of gold this enemy is worth
+	 * @param gold
+	 */
 	public void setGold(int gold) {
 		this.gold = gold;
 	}
 	
+	/**
+	 * @return Returns the damage this enemy deals once it reaches its goal
+	 */
 	public int getDamage() {
 		return damage;
 	}
 	
+	/**
+	 * Sets the damage this enemy deals
+	 * @param damage
+	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
@@ -128,17 +146,6 @@ public class Enemy
 	}
 	
 	/**
-	 * @return Returns the enemy's size
-	 */
-	public int getSize(){
-		return size;
-	}
-	
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	/**
 	 * @return Returns the enemy's position on the x-Axis
 	 */
 	public int getXPos() {
@@ -167,6 +174,4 @@ public class Enemy
 	public void setYPos(int yPos) {
 		this.yPos = yPos;
 	}
-	
-	
 }

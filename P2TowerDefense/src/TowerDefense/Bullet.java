@@ -15,6 +15,7 @@ public class Bullet
 	private Tower tower;
 	private int size, x,y, damage;
 	private boolean isMoving;
+	private String towerType;
 	
 	/**
 	 * A bullet is created with a tower, that it belongs to
@@ -27,7 +28,7 @@ public class Bullet
 		this.tower = tower;
 		
 		damage = tower.getDamage();
-		tower.getSpeed();
+		towerType = tower.getClass().getSimpleName();
 		size = 8;
 		x = tower.getX();
 		y = tower.getY();
@@ -59,6 +60,20 @@ public class Bullet
 	}
 	
 	/**
+	 * @return Returns the type of tower that this bullet belongs to
+	 */
+	public String getTowerType() {
+		return towerType;
+	}
+
+	/**
+	 * @return Returns the value of damage that this bullet deals
+	 */
+	public int getDamage() {
+		return damage;
+	}	
+	
+	/**
 	 * sets the status of this bullet to isMoving
 	 */
 	public void startMoving(){
@@ -82,7 +97,7 @@ public class Bullet
 	/**
 	 * Moves the bullet closer to its target
 	 * Moves in steps of 5 pixels in x and y direction
-	 * If the distance is less than 5 pixels the bullet automatically hits it target 
+	 * If the distance is less than 5 pixels the bullet hits its target 
 	 */
 	public void moveBullet(){
 		if(x - enemy.getXPos() > 5) x -= 5;
@@ -135,11 +150,4 @@ public class Bullet
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	/**
-	 * @return Returns the value of damage that this bullet deals
-	 */
-	public int getDamage() {
-		return damage;
-	}	
 }

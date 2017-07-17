@@ -42,6 +42,9 @@ public class View extends JFrame
 		return gamePanel;
 	}
 	
+	/**
+	 * @return Returns the SidePanel
+	 */
 	public SitePanel getGUI(){
 		return gui;
 	}
