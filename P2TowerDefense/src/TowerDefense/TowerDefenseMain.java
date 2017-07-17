@@ -25,9 +25,10 @@ public class TowerDefenseMain {
 			}
 		}
 		
+		SitePanel gui = new SitePanel();
 		GamePanel gamePanel = new GamePanel(field);
-		View view = new View(gamePanel);
-		new GameController(view, field);
+		View view = new View(gamePanel, gui);
+		new GameController(view,field);
 		
 	}
 	

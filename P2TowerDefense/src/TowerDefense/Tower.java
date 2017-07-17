@@ -12,6 +12,8 @@ public class Tower {
 	
 	private int range; 
 	private int damage;	
+	private int cost;
+	private int speed;
 	private int activeBullet;
 	private int x,y,midX,midY,size;
 	private Enemy target;
@@ -99,6 +101,30 @@ public class Tower {
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+	
+	public int getRange() {
+		return range;
+	}
+	
+	public void setRange(int range) {
+		this.range = range;
+	}
+	
+	public int getCost() {
+		return cost;
+	}
+	
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 	/**

@@ -12,6 +12,8 @@ public class Enemy
 	private	Rectangle enemy;
 	
 	private int hitpoints;
+	private int damage;
+	private int gold;
 	private int x,y;
 	private int xPos,yPos;
 	private int size;
@@ -23,17 +25,12 @@ public class Enemy
 	public Enemy(Field[][] field)
 	{
 		this.field = field;
-	
-		hitpoints = 20;
-		size = 10;
-		
+			
 		x = Values.ENEMY_START_X;				//Position im Raster
 		y = Values.ENEMY_START_Y;
 		
 		xPos = field[x][y].getXPos();				//Tatsächliche Koordinaten
 		yPos = field[x][y].getYPos();
-		
-		enemy = new Rectangle(xPos,yPos,size,size);
 		
 	}
 	
@@ -65,6 +62,10 @@ public class Enemy
 		return enemy;
 	}
 	
+	public void setEnemy(int size){
+		this.enemy = new Rectangle(xPos,yPos,size,size);
+	}
+	
 	/**
 	 * @return Returns the current hitpoint of the enemy
 	 */
@@ -78,6 +79,22 @@ public class Enemy
 	 */
 	public void setHitpoints(int hitpoints) {
 		this.hitpoints = hitpoints;
+	}
+	
+	public int getGold() {
+		return gold;
+	}
+	
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 	/**
@@ -115,6 +132,10 @@ public class Enemy
 	 */
 	public int getSize(){
 		return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	/**

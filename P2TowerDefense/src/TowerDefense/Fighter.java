@@ -1,14 +1,15 @@
 package TowerDefense;
 
-public class Fighter extends Enemy{
+public class Fighter extends Enemy
+{
 	
-	public Fighter(){
+	public Fighter(Field[][] field){
+		super(field);
 		
-		super.hitPoints = 30;
-		super.speed = 2;
-		super.gold = 1;
-		
-	}
-	
-
+		super.setSize(10);
+		super.setEnemy(10);
+		super.setHitpoints(30);
+		super.setDamage(1);
+		super.setGold(1);
+	}	
 }

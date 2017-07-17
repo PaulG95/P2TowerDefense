@@ -2,13 +2,13 @@ package TowerDefense;
 
 public class Tank extends Enemy{
 
-	
-	public Tank(){
+	public Tank(Field[][] field){
+		super(field);
 		
-		super.size = 15;
-		super.hitPoints = 40;
-		super.speed = 3;
-		super.gold = 3;
-		
+		super.setSize(15);
+		super.setEnemy(15);
+		super.setHitpoints(40);
+		super.setDamage(4);
+		super.setGold(3);
 	}
 }

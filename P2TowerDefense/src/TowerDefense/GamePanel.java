@@ -12,31 +12,22 @@ import javax.swing.JPanel;
  * @author Bettina
  *
  */
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 
 	private ArrayList<Enemy> enemys;
 	private ArrayList<Tower> towers;
 	private ArrayList<Bullet> bullets;
-	private Field[][] field;
 	private Rectangle hoveredField;
 	
 	public GamePanel(Field[][] field)
 	{
-		this.field = field;
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		
-		if(enemys != null)
-		{
-			for(Enemy e: enemys)
-			{
-				g.fillRect(e.getXPos(), e.getYPos(), e.getEnemy().width, e.getEnemy().height);
-			}
-		}
 		
 		g.setColor(Color.RED);
 		if(bullets != null)
@@ -53,6 +44,15 @@ public class GamePanel extends JPanel {
 			for(Tower t: towers)
 			{
 				g.fillRect(t.getX(), t.getY(), t.getSize(), t.getSize());
+			}
+		}
+		
+		g.setColor(Color.BLUE);
+		if(enemys != null)
+		{
+			for(Enemy e: enemys)
+			{
+				g.fillRect(e.getXPos(), e.getYPos(), e.getEnemy().width, e.getEnemy().height);
 			}
 		}
 		

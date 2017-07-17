@@ -13,6 +13,7 @@ public class Field
 {
 	private Rectangle field;
 	private boolean occupied;
+	private Object occupier;
 	private int  xPos,yPos;	
 	/**
 	 * A Field is created with an x and a y value
@@ -58,8 +59,13 @@ public class Field
 	/**
 	 * sets this Field's status to occupied
 	 */
-	public void setOccupied() 
+	public void setOccupied(Object o) 
 	{
+		this.occupier = o;
 		this.occupied = true;
+	}
+	
+	public Object getOccupier() {
+		return occupier;
 	}
 }

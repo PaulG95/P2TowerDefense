@@ -13,7 +13,7 @@ public class Bullet
 	private Rectangle bullet;
 	private Enemy enemy;
 	private Tower tower;
-	private int speed, size, x,y, damage;
+	private int size, x,y, damage;
 	private boolean isMoving;
 	
 	/**
@@ -27,7 +27,7 @@ public class Bullet
 		this.tower = tower;
 		
 		damage = tower.getDamage();
-		speed = 1;
+		tower.getSpeed();
 		size = 8;
 		x = tower.getX();
 		y = tower.getY();

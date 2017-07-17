@@ -1,13 +1,16 @@
 package TowerDefense;
 
+import java.util.ArrayList;
+
 public class Shooter extends Tower{
 
 	
-	public Shooter(){
+	public Shooter(int x, int y, ArrayList<Enemy> enemys){
+		super(x,y,enemys);
 		
-		super.range = 4;
-		super.shootFrequence = 2;
-		super.damage = 20;
-		super.cost = 20;	
+		super.setRange(100);
+		super.setSpeed(2);
+		super.setDamage(20);
+		super.setCost(20);	
 	}
 }

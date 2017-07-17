@@ -10,8 +10,6 @@ import javax.swing.Timer;
  *
  */
 public class EnemyController {
-	
-	private ArrayList<Enemy> enemys;
 	/**
 	 * The Enemy is created with everything that he needs to 
 	 * control the enemies
@@ -22,18 +20,19 @@ public class EnemyController {
 	public EnemyController(View view, Field[][] field, ArrayList<Enemy> enemys)
 	{
 		GamePanel gamePanel = view.getGamePanel();
-		this.enemys = enemys;
 		gamePanel.setEnemys(enemys);
 		
-		Enemy enemy = new Enemy(field);
+		Enemy enemy = new Runner(field);
 		enemys.add(enemy);
 		
-		Timer enemyTimer = new Timer(40,e->{
-			if(enemy.getEnemy().y<700)
+		Timer enemyTimer = new Timer(40,l->{
+			for(Enemy e: enemys)
 			{
-				enemy.move();
+				if(e.getEnemy().y<700)
+				{
+					e.move();
+				}
 			}
-			
 			gamePanel.repaint();
 		});
 		
