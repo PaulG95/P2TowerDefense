@@ -5,8 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 /**
  * This class represents the Main Controller.
  * It initializes all the other Controller.
@@ -16,16 +14,16 @@ import javax.swing.JOptionPane;
 public class GameController implements MouseMotionListener
 {
 	
-	private View view;
 	private GamePanel gamePanel;
 	private Field[][] field;
-	private Rectangle hoveredField, clickedField;
+	private Rectangle hoveredField;
 	private int fieldX, fieldY;
+	
+	private boolean setTower;
+	private String newTowerType;
 	
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> enemys;
-
-	private ArrayList<ArrayList<Bullet>> bullets;	//ArrayList mit den ArrayLists der Bullets	
 
 	/**
 	 * The controller is created with the View and the gamefield
@@ -34,32 +32,93 @@ public class GameController implements MouseMotionListener
 	 */
 	public GameController(View view, Field[][] field)
 	{		
-		this.view = view;
 		this.gamePanel = view.getGamePanel();
 		this.field = field;
 		
 		enemys = new ArrayList<>();
 		towers = new ArrayList<>();
-		bullets = new ArrayList<>();
 			
-		EnemyController enemyController = new EnemyController(view,field,enemys);
-		TowerController towerController = new TowerController(view,field,towers,enemys);
-		BulletController bulletController = new BulletController(view,towers,enemys);
+//		EnemyController enemyController = 
+				new EnemyController(view,field,enemys);
+		TowerController towerController = 
+				new TowerController(view,field,towers,enemys);
+//		BulletController bulletController = 
+				new BulletController(view,towers,enemys);
 		
 		
 		view.addMouseMotionListener(this);
 		view.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
 				super.mouseClicked(e);
+
 				if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
+
+				view.getGUI().clearInfo();
+				/*
+				 * neuen Tower platzieren
+				 */
+				if(setTower)
+
 				{
-					towerController.newTower(hoveredField.x, hoveredField.y);
-					field[fieldX][fieldY].setOccupied();
+					if(!field[fieldX][fieldY].isOccupied())
+					{
+						towerController.newTower(hoveredField.x, hoveredField.y, newTowerType);
+						field[fieldX][fieldY].setOccupied(towers.get(towers.size()-1));
+					}
+					else {
+						view.getGUI().setAttribut1("Dieses Feld ist bereits belegt");
+					}
+					setTower = false;
 				}
-				else {
-					System.out.println("Bereits belegt");
+				/*
+				 * Info anzeigen
+				 */
+				else 
+				{
+					if(field[fieldX][fieldY].isOccupied())
+					{
+						if(field[fieldX][fieldY].getOccupier() instanceof Tower)
+						{
+							Tower tower = (Tower) field[fieldX][fieldY].getOccupier();
+							view.getGUI().setName("               "+tower.getClass().getSimpleName());
+							
+							if(tower.getRange() >= 150) 		view.getGUI().setAttribut1("Range:          wide");
+							else if(tower.getRange() >= 100)	view.getGUI().setAttribut1("Range:          medium");
+							else								view.getGUI().setAttribut1("Range:          short");
+							
+							if(tower.getSpeed() == 1)		view.getGUI().setAttribut2("Speed:          fast");
+							else if(tower.getSpeed() == 2)	view.getGUI().setAttribut2("Speed:          medium");
+							else							view.getGUI().setAttribut2("Speed:          slow");
+							
+							view.getGUI().setAttribut3("Damage:      "+ tower.getDamage());
+							view.getGUI().setAttribut4("Cost:             "+ tower.getCost());
+						}
+						else if(field[fieldX][fieldY].getOccupier() instanceof Enemy)
+						{
+							Enemy enemy = (Enemy) field[fieldX][fieldY].getOccupier();
+							view.getGUI().setName("               "+enemy.getClass().getSimpleName());
+							view.getGUI().setAttribut1("Hitpoints:        "+ enemy.getHitpoints());
+							view.getGUI().setAttribut2("Damage:           "+ enemy.getDamage());
+							view.getGUI().setAttribut3("Gold:             "+ enemy.getGold());
+						}
+					}
 				}
 			}
+		});
+		
+		view.getGUI().getT1Btn().addActionListener(e->{
+			newTowerType = "shooter";
+			setTower = true;
+		});
+		
+		view.getGUI().getT2Btn().addActionListener(e->{
+			newTowerType = "shotgun";
+			setTower = true;
+		});
+		
+		view.getGUI().getT3Btn().addActionListener(e->{
+			newTowerType = "sniper";
+			setTower = true;
 		});
 	}
 

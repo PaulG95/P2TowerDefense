@@ -13,7 +13,11 @@ public class Field
 {
 	private Rectangle field;
 	private boolean occupied;
+
 	private boolean lastPath;
+
+	private Object occupier;
+
 	private int  xPos,yPos;	
 	/**
 	 * A Field is created with an x and a y value
@@ -60,11 +64,13 @@ public class Field
 	/**
 	 * sets this Field's status to occupied
 	 */
-	public void setOccupied() 
+	public void setOccupied(Object o) 
 	{
+		this.occupier = o;
 		this.occupied = true;
 	}
 	
+
 	//kevins pseudokot äria
 	private boolean _isPath;
 	
@@ -82,5 +88,9 @@ public class Field
 	
 	public void setLastPath(boolean lastPath) {
 		this.lastPath = lastPath;
+	}
+	public Object getOccupier() {
+		return occupier;
+
 	}
 }
