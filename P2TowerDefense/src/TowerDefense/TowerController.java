@@ -45,17 +45,22 @@ public class TowerController {
 		towerTimer.start();
 	}
 	
-	public void newTower(int x, int y)
+	public void newTower(int x, int y, String towerType)
 	{
-		Tower tower = new Tower(x,y,enemys);
+		Tower newTower;
+		if(towerType.equals("shooter")) 		newTower = new Shooter(x,y, enemys);
+		else if(towerType.equals("shotgun")) 	newTower = new Shotgun(x,y, enemys);
+		else if(towerType.equals("sniper"))		newTower = new Sniper (x,y, enemys);
+		else newTower = null;
+		
 		if(!towers.isEmpty())
 		{
-			this.gamePanel.addBullets(tower.getBullets());		
+			this.gamePanel.addBullets(newTower.getBullets());		
 		}
 		else 
 		{
-			this.gamePanel.setBullets(tower.getBullets());
+			this.gamePanel.setBullets(newTower.getBullets());
 		}
-		towers.add(tower);
+		towers.add(newTower);
 	}
 }

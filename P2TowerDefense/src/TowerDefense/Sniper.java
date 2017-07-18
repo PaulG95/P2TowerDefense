@@ -1,12 +1,15 @@
 package TowerDefense;
 
+import java.util.ArrayList;
+
 public class Sniper extends Tower{
 
-	public Sniper(){
+	public Sniper(int x, int y, ArrayList<Enemy> enemys){
+		super(x,y,enemys);
 		
-		super.range = 20;
-		super.shootFrequence = 6;
-		super.damage = 40;
-		super.cost = 40;
+		super.setRange(150);
+		super.setSpeed(3);
+		super.setDamage(40);
+		super.setCost(40);
 	}
 }

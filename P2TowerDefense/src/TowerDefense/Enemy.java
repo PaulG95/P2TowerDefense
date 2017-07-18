@@ -12,10 +12,12 @@ public class Enemy
 	private	Rectangle enemy;
 	
 	private int hitpoints;
+	private int damage;
+	private int gold;
 	private int x,y;
 	private int xPos,yPos;
-	private int size;
 	private Field field[][];
+	
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
@@ -23,17 +25,12 @@ public class Enemy
 	public Enemy(Field[][] field)
 	{
 		this.field = field;
-	
-		hitpoints = 20;
-		size = 10;
-		
+			
 		x = Values.ENEMY_START_X;				//Position im Raster
 		y = Values.ENEMY_START_Y;
 		
 		xPos = field[x][y].getXPos();				//Tatsächliche Koordinaten
 		yPos = field[x][y].getYPos();
-		
-		enemy = new Rectangle(xPos,yPos,size,size);
 		
 	}
 	
@@ -80,7 +77,15 @@ public class Enemy
 	}
 	
 	/**
-	 * @return Returns the current hitpoint of the enemy
+	 * creates the rectangle that represents the enemy
+	 * @param size Is the side length of this enemy
+	 */
+	public void setEnemy(int size){
+		this.enemy = new Rectangle(xPos,yPos,size,size);
+	}
+	
+	/**
+	 * @return Returns the current hitpoints of the enemy
 	 */
 	public int getHitpoints() {
 		return hitpoints;
@@ -92,6 +97,36 @@ public class Enemy
 	 */
 	public void setHitpoints(int hitpoints) {
 		this.hitpoints = hitpoints;
+	}
+	
+	/**
+	 * @return Returns the amount of gold that this enemy is worth
+	 */
+	public int getGold() {
+		return gold;
+	}
+	
+	/**
+	 * sets the amount of gold this enemy is worth
+	 * @param gold
+	 */
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	
+	/**
+	 * @return Returns the damage this enemy deals once it reaches its goal
+	 */
+	public int getDamage() {
+		return damage;
+	}
+	
+	/**
+	 * Sets the damage this enemy deals
+	 * @param damage
+	 */
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 	/**
@@ -125,13 +160,6 @@ public class Enemy
 	}
 	
 	/**
-	 * @return Returns the enemy's size
-	 */
-	public int getSize(){
-		return size;
-	}
-
-	/**
 	 * @return Returns the enemy's position on the x-Axis
 	 */
 	public int getXPos() {
@@ -160,6 +188,4 @@ public class Enemy
 	public void setYPos(int yPos) {
 		this.yPos = yPos;
 	}
-	
-	
 }

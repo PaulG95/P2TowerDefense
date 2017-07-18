@@ -4,15 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SitePanel extends JFrame{
+@SuppressWarnings("serial")
+public class SitePanel extends JPanel{
 
 	
 	private JButton t1Btn;
@@ -27,10 +24,11 @@ public class SitePanel extends JFrame{
 	private JButton end;
 	private JButton nextWave;
 	
+	private JLabel attribut1,attribut2,attribut3,attribut4, name;
+	
 	public SitePanel(){
 		
-		//MainLayout
-		JPanel pl = new JPanel(new GridLayout(3, 1));
+		setLayout(new GridLayout(3, 1));
 		
 		//TowerPanel
 		JPanel towerPl = new JPanel ();
@@ -53,13 +51,13 @@ public class SitePanel extends JFrame{
 		towerGrid.setBackground(color);
 		towerGrid.setPreferredSize(new Dimension(200, 200));
 		
-		t1Btn = new JButton("Tower 1");
+		t1Btn = new JButton("Shooter");
 		t1Btn.setBackground(btnColor);
 		
-		t2Btn = new JButton("Tower 2");
+		t2Btn = new JButton("Shotgun");
 		t2Btn.setBackground(btnColor);
 		
-		t3Btn = new JButton("Tower 3");
+		t3Btn = new JButton("Sniper");
 		t3Btn.setBackground(btnColor);
 		
 		t4Btn = new JButton("Tower 4");
@@ -69,14 +67,15 @@ public class SitePanel extends JFrame{
  * 		INFOPANEL
  */
 		
-		JPanel info = new JPanel(new GridLayout(4,1,20,20));
+		JPanel info = new JPanel(new GridLayout(5,1));
 		info.setBackground(new Color(255,255,245));
 		info.setPreferredSize(new Dimension(200, 200));
 		
-		JLabel cost = new JLabel ("Cost: ");
-		JLabel damage = new JLabel ("Damage: ");
-		JLabel range = new JLabel ("Range: ");
-		JLabel frequence = new JLabel ("Shootfrequence: ");
+		name = new JLabel();
+		attribut1 = new JLabel();
+		attribut2 = new JLabel();
+		attribut3 = new JLabel();
+		attribut4 = new JLabel();
 		
 		
 /*
@@ -106,10 +105,11 @@ public class SitePanel extends JFrame{
 		
 		// Add Labels to InfoPanel
 		
-		info.add(cost);
-		info.add(damage);
-		info.add(range);
-		info.add(frequence);
+		info.add(name);
+		info.add(attribut1);
+		info.add(attribut2);
+		info.add(attribut3);
+		info.add(attribut4);
 			
 		// Add Buttons to Menu
 		menuGrid.add(nextWave);
@@ -121,16 +121,69 @@ public class SitePanel extends JFrame{
 		menuPl.add(menuGrid, BorderLayout.CENTER);
 		towerInfoPl.add(info, BorderLayout.CENTER);
 
-		pl.add(towerPl);
-		pl.add(towerInfoPl);
-		pl.add(menuPl);
+		add(towerPl);
+		add(towerInfoPl);
+		add(menuPl);
 		
-		add(pl);
-	
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(300, 700);
+		setSize(300, Values.FRAME_HEIGHT);
 		setVisible(true);
 		
+	}
+
+	public JButton getT1Btn() {
+		return t1Btn;
+	}
+
+	public JButton getT2Btn() {
+		return t2Btn;
+	}
+
+	public JButton getT3Btn() {
+		return t3Btn;
+	}
+
+	public JButton getT4Btn() {
+		return t4Btn;
+	}
+
+	public JButton getSave() {
+		return save;
+	}
+
+	public JButton getEnd() {
+		return end;
+	}
+
+	public JButton getNextWave() {
+		return nextWave;
+	}
+
+	public void setAttribut1(String attribut1) {
+		this.attribut1.setText(attribut1);
+	}
+
+	public void setAttribut2(String attribut2) {
+		this.attribut2.setText(attribut2);
+	}
+
+	public void setAttribut3(String attribut3) {
+		this.attribut3.setText(attribut3);
+	}
+
+	public void setAttribut4(String attribut4) {
+		this.attribut4.setText(attribut4);
+	}
+
+	public void setName(String name) {
+		this.name.setText(name);
+	}
+	
+	public void clearInfo(){
+		this.name.setText("");
+		this.attribut1.setText("");
+		this.attribut2.setText("");
+		this.attribut3.setText("");
+		this.attribut4.setText("");
 	}
 	
 }

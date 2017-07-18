@@ -2,16 +2,7 @@ package TowerDefense;
 
 import java.awt.BorderLayout;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 /**
  * This class represents the Game-Frame.
  * It contains the Game-Field
@@ -19,19 +10,23 @@ import javax.swing.JPanel;
  * @author Bettina
  *
  */
+@SuppressWarnings("serial")
 public class View extends JFrame
 {
-	private Field field[][];
 	private GamePanel gamePanel;
+	private SitePanel gui;
 	/**
 	 * The View is created with an instance of the GamePanel
 	 * @param gamePanel which is responsible for painting all the components
 	 */
-	public View(GamePanel gamePanel)
+	public View(GamePanel gamePanel, SitePanel gui)
 	{	
-		this.gamePanel = gamePanel;				
+		this.gui = gui;
+		this.gamePanel = gamePanel;	
 		getContentPane().add(this.gamePanel);
 		repaint();
+		
+		add(gui, BorderLayout.EAST);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(Values.FRAME_WIDTH,Values.FRAME_HEIGHT);
@@ -45,5 +40,12 @@ public class View extends JFrame
 	 */
 	public GamePanel getGamePanel(){
 		return gamePanel;
+	}
+	
+	/**
+	 * @return Returns the SidePanel
+	 */
+	public SitePanel getGUI(){
+		return gui;
 	}
 }

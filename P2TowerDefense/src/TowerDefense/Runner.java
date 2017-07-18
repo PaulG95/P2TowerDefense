@@ -2,11 +2,12 @@ package TowerDefense;
 
 public class Runner extends Enemy{
 	
-	public Runner(){
+	public Runner(Field[][] field){
+		super(field);
 		
-		super.hitPoints = 20;
-		super.speed = 1;
-		super.gold = 2;
+		super.setEnemy(20);
+		super.setHitpoints(20);
+		super.setDamage(2);
+		super.setGold(2);
 	}
-
 }

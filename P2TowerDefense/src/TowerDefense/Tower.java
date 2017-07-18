@@ -12,6 +12,8 @@ public class Tower {
 	
 	private int range; 
 	private int damage;	
+	private int cost;
+	private int speed;
 	private int activeBullet;
 	private int x,y,midX,midY,size;
 	private Enemy target;
@@ -99,6 +101,52 @@ public class Tower {
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+	
+	/**
+	 * @return Returns the shooting range of this tower
+	 */
+	public int getRange() {
+		return range;
+	}
+	
+	/**
+	 * Sets the range of this tower 
+	 * @param range
+	 */
+	public void setRange(int range) {
+		this.range = range;
+	}
+	
+	/**
+	 * @return Returns the cost of this tower
+	 */
+	public int getCost() {
+		return cost;
+	}
+	
+	/**
+	 * sets the cost of this tower which the player
+	 * has to pay to build it
+	 * @param cost
+	 */
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
+	/**
+	 * @return Returns the speed of this tower
+	 */
+	public int getSpeed() {
+		return speed;
+	}
+	
+	/**
+	 * Sets the firing rate (speed) of this tower
+	 * @param speed
+	 */
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 	/**
