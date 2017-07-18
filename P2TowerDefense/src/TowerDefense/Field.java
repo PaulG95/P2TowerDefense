@@ -15,7 +15,7 @@ public class Field
 	private boolean occupied;
 
 	private boolean lastPath;
-
+	private boolean _isPath;
 	private Object occupier;
 
 	private int  xPos,yPos;	
@@ -69,10 +69,6 @@ public class Field
 		this.occupier = o;
 		this.occupied = true;
 	}
-	
-
-	//kevins pseudokot äria
-	private boolean _isPath;
 	
 	public boolean isPath() {
 		return _isPath;

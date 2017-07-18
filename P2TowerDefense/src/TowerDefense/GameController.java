@@ -51,7 +51,7 @@ public class GameController implements MouseMotionListener
 			public void mouseClicked(MouseEvent e){
 				super.mouseClicked(e);
 
-				if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
+				if(!field[fieldX][fieldY].isOccupied() && field[fieldX][fieldY].isPath())
 
 				view.getGUI().clearInfo();
 				/*
@@ -60,7 +60,7 @@ public class GameController implements MouseMotionListener
 				if(setTower)
 
 				{
-					if(!field[fieldX][fieldY].isOccupied())
+					if(!field[fieldX][fieldY].isOccupied() && field[fieldX][fieldY].isPath())
 					{
 						towerController.newTower(hoveredField.x, hoveredField.y, newTowerType);
 						field[fieldX][fieldY].setOccupied(towers.get(towers.size()-1));
@@ -75,7 +75,7 @@ public class GameController implements MouseMotionListener
 				 */
 				else 
 				{
-					if(field[fieldX][fieldY].isOccupied())
+					if(field[fieldX][fieldY].isOccupied() && field[fieldX][fieldY].isPath())
 					{
 						if(field[fieldX][fieldY].getOccupier() instanceof Tower)
 						{
