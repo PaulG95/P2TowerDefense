@@ -70,12 +70,18 @@ public class Field
 		this.occupied = true;
 	}
 	
+	public void releaseField()
+	{
+		this.occupied = false;
+		this.occupier = null;
+	}
+	
 	public boolean isPath() {
 		return _isPath;
 	}
 	
 	public void setPath(boolean _isPath) {
-		this._isPath = isPath();
+		this._isPath = _isPath;
 	}
 	
 	public boolean isLastPath() {

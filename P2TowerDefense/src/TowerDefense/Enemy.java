@@ -16,8 +16,10 @@ public class Enemy
 	private int gold;
 	private int x,y;
 	private int xPos,yPos;
-	private Field field[][];
-	
+	private int lastPathX;
+	private int lastPathY;
+	private Field[][] enemyField;
+	private Field[][] field;
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
@@ -25,13 +27,60 @@ public class Enemy
 	public Enemy(Field[][] field)
 	{
 		this.field = field;
+		
+		enemyField = new Field[Values.AMOUNT_OF_XFIELDS][Values.AMOUNT_OF_YFIELDS];
+	
+		for(int x=0; x<Values.AMOUNT_OF_XFIELDS; x++)
+		{
+			for(int y=0; y<Values.AMOUNT_OF_YFIELDS; y++)
+			{
+				enemyField[x][y] = new Field(x*Values.FIELD_SIZE,y*Values.FIELD_SIZE);
+			}
+		}
 			
 		x = Values.ENEMY_START_X;				//Position im Raster
 		y = Values.ENEMY_START_Y;
 		
-		xPos = field[x][y].getXPos();				//Tatsächliche Koordinaten
-		yPos = field[x][y].getYPos();
+		xPos = enemyField[x][y].getXPos();				//Tatsächliche Koordinaten
+		yPos = enemyField[x][y].getYPos();
 		
+		
+
+		
+		//Setting the Enemy Path
+		for (int x=0; x<3; x++){
+			enemyField[x][13].setPath(true);
+		}
+		for (int y=3; y<14; y++){
+			enemyField[2][y].setPath(true);
+		}
+		for (int x=2; x<20; x++){
+			enemyField[x][3].setPath(true);
+			if(x==10){
+				x = 12;
+			}
+		}
+		for (int y=3; y<9; y++){
+			enemyField[10][y].setPath(true);
+		}
+		for (int x=6; x<10; x++){
+			enemyField[x][8].setPath(true);
+		}
+		for (int y=8; y<16; y++){
+			enemyField[6][y].setPath(true);
+		}
+		for (int x=6; x<17; x++){
+			enemyField[x][15].setPath(true);
+		}
+		for (int y=9; y<16; y++){
+			enemyField[16][y].setPath(true);
+		}
+		for (int x=13; x<17; x++){
+			enemyField[x][9].setPath(true);
+		}
+		for (int y=3; y<10; y++){
+			enemyField[13][y].setPath(true);
+		}
 	}
 	
 	/**
@@ -50,14 +99,53 @@ public class Enemy
 	public void move(){
 //		setYPos(getYPos()+1);  //<- böse bettina!
 //		System.out.println(xPos);
-		if(xPos >= 75){
-			setYPos(getYPos()-1);
-		}else{
-			setXPos(getXPos()+1);
-		}
 		//if(xPos < 20 && yPos == 3) xPos++;
 		//else if(xPos == 20 && yPos > 0) yPos--;
 		//else if(xPos < 30 && yPos == 0) xPos++;
+		
+		int resultX = (int)(xPos/Values.FIELD_SIZE);
+		int resultY = (int)(yPos/Values.FIELD_SIZE);
+		
+		
+		if(xPos <= 31){
+			xPos ++;
+			if(xPos == 30){
+				enemyField[0][13].setLastPath(true);
+				lastPathX = 0;
+				lastPathY= 13;
+			}
+		}else{
+		if(enemyField[resultX-1][resultY].isPath() && !enemyField[resultX-1][resultY].isLastPath()){
+			updateFieldState(resultX, resultY);
+			//Gehe nach links
+			xPos --;
+		}else if(enemyField[resultX][resultY-1].isPath() && !enemyField[resultX][resultY-1].isLastPath()){
+			updateFieldState(resultX, resultY);
+			enemyField[resultX][resultY].setLastPath(true);
+			//Gehe nach Oben
+			yPos --;
+		}else if(enemyField[resultX+1][resultY].isPath() && !enemyField[resultX+1][resultY].isLastPath()){
+			updateFieldState(resultX, resultY);
+			enemyField[resultX][resultY].setLastPath(true);
+			//Gehe nach Rechts
+			xPos ++;
+		}else if(enemyField[resultX][resultY+1].isPath() && !enemyField[resultX][resultY+1].isLastPath()){
+			updateFieldState(resultX, resultY);
+			enemyField[resultX][resultY].setLastPath(true);
+			//Gehe nach Unten
+			yPos ++;
+		}else{
+			//Ende
+		}}
+	}
+	
+	public void updateFieldState(int resultX, int resultY)
+	{
+		enemyField[resultX][resultY].setLastPath(true);
+		field[resultX][resultY].setOccupied(this);
+		field[lastPathX][lastPathY].releaseField();
+		lastPathX = resultX;
+		lastPathY = resultY;
 	}
 		
 	//welches feld bin ich gerade? returns => isPath, index x,y

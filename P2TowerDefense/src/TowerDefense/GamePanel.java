@@ -33,8 +33,12 @@ public class GamePanel extends JPanel {
 	private File shooterBulletFile, shotgunBulletFile, sniperBulletFile;
 	private File shooterFile, shotgunFile, sniperFile;
 	
-	public GamePanel()
+	private Field[][] field;
+	
+	public GamePanel(Field[][] field)
 	{
+		this.field = field;
+		
 		fighterFile = new File("../graphics/Jet2_Enemy.png");
 		runnerFile = new File("../graphics/Plane_Enemy.png");
 		tankFile = new File("../graphics/Tank2_Enemy.png");
@@ -64,6 +68,13 @@ public class GamePanel extends JPanel {
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		
+		g.setColor(Color.PINK);
+		for(int i=0; i<20; i++){
+			for(int j=0; j<20; j++) {
+				if(field[i][j].isPath()) g.drawRect(field[i][j].getXPos(),field[i][j].getYPos(),30,30);
+			}
+		}
 		
 		g.setColor(Color.RED);
 		if(bullets != null)
