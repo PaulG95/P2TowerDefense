@@ -51,7 +51,7 @@ public class GameController implements MouseMotionListener
 		view.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
 				super.mouseClicked(e);
-				if(!field[fieldX][fieldY].isOccupied())
+				if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
 				{
 					towerController.newTower(hoveredField.x, hoveredField.y);
 					field[fieldX][fieldY].setOccupied();

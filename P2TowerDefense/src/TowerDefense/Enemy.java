@@ -51,12 +51,26 @@ public class Enemy
 	 * moves the enemy one pixel forward
 	 */
 	public void move(){
-		setYPos(getYPos()+1);
-//		int[] enemyPath = new int[70];
-//		for (int i=0; i<enemyPath.length; i++){
-//			enemyPath [i] = i+1;
-//		}
+//		setYPos(getYPos()+1);  //<- böse bettina!
+//		System.out.println(xPos);
+		if(xPos >= 75){
+			setYPos(getYPos()-1);
+		}else{
+			setXPos(getXPos()+1);
+		}
+		//if(xPos < 20 && yPos == 3) xPos++;
+		//else if(xPos == 20 && yPos > 0) yPos--;
+		//else if(xPos < 30 && yPos == 0) xPos++;
 	}
+		
+	//welches feld bin ich gerade? returns => isPath, index x,y
+	//von x und y ausgehen: links, rechts, oben, unten feld checken: isPath? wenn ja bewege dahin. if(field[x-1][y].isPath() && !field[x-1][y].isLastField()) { field x y.isLastField gehe nach links}
+	//verhindern, dass ich im kreis gehe (komme von links, gehe nach links. oh rechts is pfad? gehe nach rechts. links is pfad! gehe nach links...)
+	//isLastField flag prüfen: if isLastPath GEH DA BLOß NICHT HIN!
+	
+	//aktuelles feld ermitteln:
+	//xPos(bzw. yPos) / tileSize => zb. 310 / 30 => 10,3333 (falls result ein float dann :  (int) 10,333) 
+	//int result = xPos / tileSize; 
 	
 	/**
 	 * @return Returns the rectangle that represents the enemy

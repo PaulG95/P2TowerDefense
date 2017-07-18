@@ -15,6 +15,6 @@ public class Values {
 	static final int AMOUNT_OF_XFIELDS = 20;
 	static final int AMOUNT_OF_YFIELDS = 20;
 	
-	static final int ENEMY_START_X = 3;
-	static final int ENEMY_START_Y = 0;	
+	static final int ENEMY_START_X = 0;
+	static final int ENEMY_START_Y = 13;	
 }

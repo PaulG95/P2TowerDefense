@@ -13,6 +13,7 @@ public class Field
 {
 	private Rectangle field;
 	private boolean occupied;
+	private boolean lastPath;
 	private int  xPos,yPos;	
 	/**
 	 * A Field is created with an x and a y value
@@ -21,7 +22,8 @@ public class Field
 	 */
 	public Field(int xPos, int yPos)
 	{
-		occupied = false;	
+		occupied = false;
+		_isPath = false;
 		this.xPos = xPos;
 		this.yPos = yPos;
 		field = new Rectangle(xPos,yPos,Values.FIELD_SIZE,Values.FIELD_SIZE);
@@ -61,5 +63,24 @@ public class Field
 	public void setOccupied() 
 	{
 		this.occupied = true;
+	}
+	
+	//kevins pseudokot äria
+	private boolean _isPath;
+	
+	public boolean isPath() {
+		return _isPath;
+	}
+	
+	public void setPath(boolean _isPath) {
+		this._isPath = isPath();
+	}
+	
+	public boolean isLastPath() {
+		return lastPath;
+	}
+	
+	public void setLastPath(boolean lastPath) {
+		this.lastPath = lastPath;
 	}
 }
