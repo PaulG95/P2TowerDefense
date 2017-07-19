@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GameController implements MouseMotionListener
 {
-	
+	private View view;
 	private GamePanel gamePanel;
 	private Field[][] field;
 	private Rectangle hoveredField;
@@ -24,6 +24,8 @@ public class GameController implements MouseMotionListener
 	
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> enemys;
+	
+	Tower shooter,shotgun,sniper;
 
 	/**
 	 * The controller is created with the View and the gamefield
@@ -32,11 +34,16 @@ public class GameController implements MouseMotionListener
 	 */
 	public GameController(View view, Field[][] field)
 	{		
+		this.view = view;
 		this.gamePanel = view.getGamePanel();
 		this.field = field;
 		
 		enemys = new ArrayList<>();
 		towers = new ArrayList<>();
+		
+		shooter = new Shooter(0,19, enemys);		//Beispiel Tower für Infoausgabe
+		shotgun = new Shotgun(0,19, enemys);
+		sniper  = new Sniper(0,19, enemys);
 			
 //		EnemyController enemyController = 
 				new EnemyController(view,field,enemys);
@@ -75,23 +82,12 @@ public class GameController implements MouseMotionListener
 				 */
 				else 
 				{
-					if(field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
+					if(field[fieldX][fieldY].isOccupied())
 					{
 						if(field[fieldX][fieldY].getOccupier() instanceof Tower)
 						{
 							Tower tower = (Tower) field[fieldX][fieldY].getOccupier();
-							view.getGUI().setName("               "+tower.getClass().getSimpleName());
-							
-							if(tower.getRange() >= 150) 		view.getGUI().setAttribut1("Range:          wide");
-							else if(tower.getRange() >= 100)	view.getGUI().setAttribut1("Range:          medium");
-							else								view.getGUI().setAttribut1("Range:          short");
-							
-							if(tower.getSpeed() == 1)		view.getGUI().setAttribut2("Speed:          fast");
-							else if(tower.getSpeed() == 2)	view.getGUI().setAttribut2("Speed:          medium");
-							else							view.getGUI().setAttribut2("Speed:          slow");
-							
-							view.getGUI().setAttribut3("Damage:      "+ tower.getDamage());
-							view.getGUI().setAttribut4("Cost:             "+ tower.getCost());
+							setTowerInfo(tower);
 						}
 						else if(field[fieldX][fieldY].getOccupier() instanceof Enemy)
 						{
@@ -106,22 +102,66 @@ public class GameController implements MouseMotionListener
 			}
 		});
 		
+		/*
+		 * TOWER BUTTONS
+		 */
 		view.getGUI().getT1Btn().addActionListener(e->{
-			newTowerType = "shooter";
-			setTower = true;
+			if(!setTower)
+			{
+				setTowerInfo(shooter);
+				newTowerType = "shooter";
+				setTower = true;
+			} else
+			{
+				view.getGUI().clearInfo();
+				setTower = false;
+			}
+			
 		});
 		
 		view.getGUI().getT2Btn().addActionListener(e->{
-			newTowerType = "shotgun";
-			setTower = true;
+			if(!setTower)
+			{
+				setTowerInfo(shotgun);
+				newTowerType = "shotgun";
+				setTower = true;
+			} else
+			{
+				view.getGUI().clearInfo();
+				setTower = false;
+			}
 		});
 		
 		view.getGUI().getT3Btn().addActionListener(e->{
-			newTowerType = "sniper";
-			setTower = true;
+			if(!setTower)
+			{
+				setTowerInfo(sniper);
+				newTowerType = "sniper";
+				setTower = true;
+			} else
+			{
+				view.getGUI().clearInfo();
+				setTower = false;
+			}
 		});
 	}
 
+	public void setTowerInfo(Tower tower)
+	{
+		view.getGUI().setName("               "+tower.getClass().getSimpleName());
+		
+		if(tower.getRange() >= 150) 		view.getGUI().setAttribut1("Range:          wide");
+		else if(tower.getRange() >= 100)	view.getGUI().setAttribut1("Range:          medium");
+		else								view.getGUI().setAttribut1("Range:          short");
+		
+		if(tower.getSpeed() == 1)		view.getGUI().setAttribut2("Speed:          fast");
+		else if(tower.getSpeed() == 2)	view.getGUI().setAttribut2("Speed:          medium");
+		else							view.getGUI().setAttribut2("Speed:          slow");
+		
+		view.getGUI().setAttribut3("Damage:      "+ tower.getDamage());
+		view.getGUI().setAttribut4("Cost:             "+ tower.getCost());
+	}
+	
 	@Override
 	public void mouseDragged(MouseEvent e) {}
 
@@ -144,7 +184,7 @@ public class GameController implements MouseMotionListener
 						&& my > field[x][y].getYPos() && my < field[x][y].getYPos()+Values.FIELD_SIZE)
 				{
 					fieldX = x;
-					fieldY = y;
+					fieldY = y-1;
 					hoveredField = field[x][y-1].getField();
 					gamePanel.setHoveredField(hoveredField);
 				}

@@ -20,6 +20,7 @@ public class Enemy
 	private int lastPathY;
 	private Field[][] enemyField;
 	private Field[][] field;
+	private int moveCounter;
 	
 	private boolean reachedEnd;
 	/**
@@ -47,7 +48,7 @@ public class Enemy
 		xPos = enemyField[x][y].getXPos();				//Tatsächliche Koordinaten
 		yPos = enemyField[x][y].getYPos();
 		
-		
+		moveCounter = 0;
 
 		
 		//Setting the Enemy Path
@@ -147,8 +148,16 @@ public class Enemy
 		enemyField[resultX][resultY].setLastPath(true);
 		field[resultX][resultY].setOccupied(this);
 		field[lastPathX][lastPathY].releaseField();
-		lastPathX = resultX;
-		lastPathY = resultY;
+		if(moveCounter < 30)
+		{
+			moveCounter++;
+		} else
+		{
+			lastPathX = resultX;
+			lastPathY = resultY;
+			moveCounter = 0;
+		}
+		
 	} 
 	
 	public boolean reachedEnd(){
