@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 /**
  * This class represents the Main Controller.
  * It initializes all the other Controller.
@@ -16,6 +18,10 @@ public class GameController implements MouseMotionListener
 	private View view;
 	private GamePanel gamePanel;
 	private Field[][] field;
+	
+	private int min, sek;
+	private int score;
+	
 	private Rectangle hoveredField;
 	private int fieldX, fieldY;
 	
@@ -32,11 +38,23 @@ public class GameController implements MouseMotionListener
 	 * @param view
 	 * @param field is the array of Field which built the gamefield
 	 */
-	public GameController(View view, Field[][] field)
+	public GameController(View view, Field[][] field, Player player)
 	{		
 		this.view = view;
 		this.gamePanel = view.getGamePanel();
 		this.field = field;
+		
+		Timer timer = new Timer(1000, e->{
+			if(sek<60) sek++;
+			else 
+			{
+				min++;
+				sek = 0;
+			}
+			view.getInfos().setSekLbl(String.valueOf(sek));
+			view.getInfos().setMinLbl(String.valueOf(min));
+		});
+		timer.start();
 		
 		enemys = new ArrayList<>();
 		towers = new ArrayList<>();
@@ -45,14 +63,15 @@ public class GameController implements MouseMotionListener
 		shotgun = new Shotgun(0,19, enemys);
 		sniper  = new Sniper(0,19, enemys);
 			
-//		EnemyController enemyController = 
+		EnemyController enemyController = 
 				new EnemyController(view,field,enemys);
 		TowerController towerController = 
 				new TowerController(view,field,towers,enemys);
 //		BulletController bulletController = 
 				new BulletController(view,towers,enemys);
 		
-		
+		enemyController.setPlayer(player);
+				
 		view.addMouseMotionListener(this);
 		view.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){

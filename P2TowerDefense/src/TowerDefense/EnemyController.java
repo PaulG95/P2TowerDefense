@@ -15,6 +15,8 @@ public class EnemyController {
 	int counter;
 	Enemy eny1,eny2;
 	
+	private Player player;
+	
 	/**
 	 * The Enemy is created with everything that he needs to 
 	 * control the enemies
@@ -30,7 +32,7 @@ public class EnemyController {
 		Enemy enemy = new Runner(field);
 		enemys.add(enemy);
 		
-		Timer enemyTimer = new Timer(40,l->{
+		Timer enemyTimer = new Timer(10,l->{
 			if(counter == 4000)
 			{
 				eny1 = new Fighter(field);
@@ -43,8 +45,14 @@ public class EnemyController {
 			}
 			for (Iterator<Enemy> iterator = enemys.iterator(); iterator.hasNext(); ) {
 			    Enemy e = iterator.next();
-			    if (e.getHitpoints() == 0 || e.reachedEnd()) {
+			    if (e.getHitpoints() == 0) {
+			    	view.getInfos().setScoreLbl(String.valueOf(e.getGold()));
 			        iterator.remove();
+			    } else if (e.reachedEnd())
+			    {
+			    	player.setLife(player.getLife()-e.getDamage());
+			    	view.getInfos().setLifeLbl(player.getLife());
+			    	iterator.remove();
 			    }
 			}
 			for(Enemy e: enemys)
@@ -60,4 +68,9 @@ public class EnemyController {
 		
 		enemyTimer.start();
 	}	
+	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
+	}
 }

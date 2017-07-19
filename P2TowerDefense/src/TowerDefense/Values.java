@@ -17,4 +17,6 @@ public class Values {
 	
 	static final int ENEMY_START_X = 0;
 	static final int ENEMY_START_Y = 13;	
+	
+	static final int PLAYER_LIFE = 10;
 }

@@ -69,12 +69,13 @@ public class TowerDefenseMain {
 			//++ => 30
 			//}}
 		
-
-		
+		String testName = "Horst";
+		Player player = new Player(testName);
 		SitePanel gui = new SitePanel();
+		BottomPanel infos = new BottomPanel();
 		GamePanel gamePanel = new GamePanel(field);
-		View view = new View(gamePanel, gui);
-		new GameController(view,field);
+		View view = new View(gamePanel, gui, infos);
+		new GameController(view,field,player);
 		
 	}
 	
