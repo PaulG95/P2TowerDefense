@@ -20,6 +20,8 @@ public class Enemy
 	private int lastPathY;
 	private Field[][] enemyField;
 	private Field[][] field;
+	
+	private boolean reachedEnd;
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
@@ -27,6 +29,7 @@ public class Enemy
 	public Enemy(Field[][] field)
 	{
 		this.field = field;
+		reachedEnd = false;
 		
 		enemyField = new Field[Values.AMOUNT_OF_XFIELDS][Values.AMOUNT_OF_YFIELDS];
 	
@@ -101,8 +104,7 @@ public class Enemy
 		int resultY = (int)(yPos/Values.FIELD_SIZE);
 		
 		if(xPos == 570){
-			killed();
-			//Füge hier den Spielerschaden hinzu
+			reachedEnd = true;
 		}else{
 			if(xPos <= 31){
 				xPos ++;
@@ -148,6 +150,10 @@ public class Enemy
 		lastPathX = resultX;
 		lastPathY = resultY;
 	} 
+	
+	public boolean reachedEnd(){
+		return reachedEnd;
+	}
 	
 	/**
 	 * @return Returns the rectangle that represents the enemy

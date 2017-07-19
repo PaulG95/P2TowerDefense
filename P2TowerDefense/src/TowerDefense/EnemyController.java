@@ -1,6 +1,7 @@
 package TowerDefense;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.Timer;
 /**
@@ -39,6 +40,12 @@ public class EnemyController {
 			{
 				eny2 = new Tank(field);
 				enemys.add(eny2);
+			}
+			for (Iterator<Enemy> iterator = enemys.iterator(); iterator.hasNext(); ) {
+			    Enemy e = iterator.next();
+			    if (e.getHitpoints() == 0 || e.reachedEnd()) {
+			        iterator.remove();
+			    }
 			}
 			for(Enemy e: enemys)
 			{
