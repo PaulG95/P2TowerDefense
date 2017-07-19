@@ -20,7 +20,6 @@ public class Enemy
 	private int lastPathY;
 	private Field[][] enemyField;
 	private Field[][] field;
-	private int progress;
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
