@@ -90,7 +90,6 @@ public class Enemy
 	 */
 	public void killed(){
 		setHitpoints(0);
-		setYPos(705);
 	}
 	
 	/**
@@ -134,7 +133,7 @@ public class Enemy
 					yPos ++;
 				}else{
 					System.out.println("Hallo");
-					killed();
+					//DestroyEnemy
 					//playerHealth - enemyDmg;
 				}
 			}
