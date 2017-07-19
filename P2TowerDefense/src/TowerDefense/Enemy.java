@@ -20,6 +20,7 @@ public class Enemy
 	private int lastPathY;
 	private Field[][] enemyField;
 	private Field[][] field;
+	private int progress;
 	/**
 	 * An enemy is created with an instance of the gameField
 	 * @param field
@@ -97,46 +98,48 @@ public class Enemy
 	 * moves the enemy one pixel forward
 	 */
 	public void move(){
-//		setYPos(getYPos()+1);  //<- böse bettina!
-//		System.out.println(xPos);
-		//if(xPos < 20 && yPos == 3) xPos++;
-		//else if(xPos == 20 && yPos > 0) yPos--;
-		//else if(xPos < 30 && yPos == 0) xPos++;
 		
 		int resultX = (int)(xPos/Values.FIELD_SIZE);
 		int resultY = (int)(yPos/Values.FIELD_SIZE);
 		
-		
-		if(xPos <= 31){
-			xPos ++;
-			if(xPos == 30){
-				enemyField[0][13].setLastPath(true);
-				lastPathX = 0;
-				lastPathY= 13;
+		if(xPos == 570){
+			killed();
+			//Füge hier den Spielerschaden hinzu
+		}else{
+			if(xPos <= 31){
+				xPos ++;
+				if(xPos == 30){
+					enemyField[0][13].setLastPath(true);
+					lastPathX = 0;
+					lastPathY= 13;
+				}
+			}else{
+				if(enemyField[resultX-1][resultY].isPath() && !enemyField[resultX-1][resultY].isLastPath()){
+					updateFieldState(resultX, resultY);
+					//Gehe nach links
+					xPos --;
+				}else if(enemyField[resultX][resultY-1].isPath() && !enemyField[resultX][resultY-1].isLastPath()){
+					updateFieldState(resultX, resultY);
+					enemyField[resultX][resultY].setLastPath(true);
+					//Gehe nach Oben
+					yPos --;
+				}else if(enemyField[resultX+1][resultY].isPath() && !enemyField[resultX+1][resultY].isLastPath()){
+					updateFieldState(resultX, resultY);
+					enemyField[resultX][resultY].setLastPath(true);
+					//Gehe nach Rechts
+					xPos ++;
+				}else if(enemyField[resultX][resultY+1].isPath() && !enemyField[resultX][resultY+1].isLastPath()){
+					updateFieldState(resultX, resultY);
+					enemyField[resultX][resultY].setLastPath(true);
+					//Gehe nach Unten
+					yPos ++;
+				}else{
+					System.out.println("Hallo");
+					killed();
+					//playerHealth - enemyDmg;
+				}
 			}
-		}else{
-		if(enemyField[resultX-1][resultY].isPath() && !enemyField[resultX-1][resultY].isLastPath()){
-			updateFieldState(resultX, resultY);
-			//Gehe nach links
-			xPos --;
-		}else if(enemyField[resultX][resultY-1].isPath() && !enemyField[resultX][resultY-1].isLastPath()){
-			updateFieldState(resultX, resultY);
-			enemyField[resultX][resultY].setLastPath(true);
-			//Gehe nach Oben
-			yPos --;
-		}else if(enemyField[resultX+1][resultY].isPath() && !enemyField[resultX+1][resultY].isLastPath()){
-			updateFieldState(resultX, resultY);
-			enemyField[resultX][resultY].setLastPath(true);
-			//Gehe nach Rechts
-			xPos ++;
-		}else if(enemyField[resultX][resultY+1].isPath() && !enemyField[resultX][resultY+1].isLastPath()){
-			updateFieldState(resultX, resultY);
-			enemyField[resultX][resultY].setLastPath(true);
-			//Gehe nach Unten
-			yPos ++;
-		}else{
-			//Ende
-		}}
+		}
 	}
 	
 	public void updateFieldState(int resultX, int resultY)
@@ -146,16 +149,7 @@ public class Enemy
 		field[lastPathX][lastPathY].releaseField();
 		lastPathX = resultX;
 		lastPathY = resultY;
-	}
-		
-	//welches feld bin ich gerade? returns => isPath, index x,y
-	//von x und y ausgehen: links, rechts, oben, unten feld checken: isPath? wenn ja bewege dahin. if(field[x-1][y].isPath() && !field[x-1][y].isLastField()) { field x y.isLastField gehe nach links}
-	//verhindern, dass ich im kreis gehe (komme von links, gehe nach links. oh rechts is pfad? gehe nach rechts. links is pfad! gehe nach links...)
-	//isLastField flag prüfen: if isLastPath GEH DA BLOß NICHT HIN!
-	
-	//aktuelles feld ermitteln:
-	//xPos(bzw. yPos) / tileSize => zb. 310 / 30 => 10,3333 (falls result ein float dann :  (int) 10,333) 
-	//int result = xPos / tileSize; 
+	} 
 	
 	/**
 	 * @return Returns the rectangle that represents the enemy
