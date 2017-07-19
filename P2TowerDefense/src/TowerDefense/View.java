@@ -51,6 +51,9 @@ public class View extends JFrame
 		return gui;
 	}
 	
+	/**
+	 * @return Returns the bottomPanel
+	 */
 	public BottomPanel getInfos(){
 		return infos;
 	}

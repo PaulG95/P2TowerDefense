@@ -12,7 +12,7 @@ import javax.swing.Timer;
  */
 public class EnemyController {
 	
-	int counter;
+	int counter;			//für Testlauf
 	Enemy eny1,eny2;
 	
 	private Player player;
@@ -69,6 +69,10 @@ public class EnemyController {
 		enemyTimer.start();
 	}	
 	
+	/**
+	 * sets the current Player for this Game
+	 * @param player
+	 */
 	public void setPlayer(Player player)
 	{
 		this.player = player;

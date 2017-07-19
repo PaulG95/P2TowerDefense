@@ -6,7 +6,13 @@ import java.awt.Color;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * This Class shows the bottomPanel of the gui
+ * It contains all the infos about the Player
+ * and the current game
+ * @author Bettina
+ *
+ */
 @SuppressWarnings("serial")
 public class BottomPanel extends JPanel{
 

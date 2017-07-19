@@ -45,6 +45,14 @@ public class TowerController {
 		towerTimer.start();
 	}
 	
+	/**
+	 * Creates a new Tower of a certain type, adds it
+	 * to the ArrayList with all the towers and adds its
+	 * bullets to the already existing ones in the GamePanel
+	 * @param x	Represents the new towers x Coordinate in the Field
+	 * @param y Represents the new towers y Coordinate in the Field
+	 * @param towerType Represents the type of the new tower
+	 */
 	public void newTower(int x, int y, String towerType)
 	{
 		Tower newTower;

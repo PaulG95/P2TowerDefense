@@ -68,8 +68,9 @@ public class TowerDefenseMain {
 //			
 			//++ => 30
 			//}}
-		
+
 		String testName = "Horst";
+		
 		Player player = new Player(testName);
 		SitePanel gui = new SitePanel();
 		BottomPanel infos = new BottomPanel();

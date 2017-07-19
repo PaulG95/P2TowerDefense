@@ -44,8 +44,8 @@ public class GameController implements MouseMotionListener
 		this.gamePanel = view.getGamePanel();
 		this.field = field;
 		
-		Timer timer = new Timer(1000, e->{
-			if(sek<60) sek++;
+		Timer timer = new Timer(1000, e->{						//Timer der die Spielzeit festhält
+			if(sek<60) sek++;									//für die scores
 			else 
 			{
 				min++;
@@ -56,8 +56,8 @@ public class GameController implements MouseMotionListener
 		});
 		timer.start();
 		
-		enemys = new ArrayList<>();
-		towers = new ArrayList<>();
+		enemys = new ArrayList<>();					//ArrayListe aller enemys im Spiel
+		towers = new ArrayList<>();					//ArrayList aller Tower im Spiel			
 		
 		shooter = new Shooter(0,19, enemys);		//Beispiel Tower für Infoausgabe
 		shotgun = new Shotgun(0,19, enemys);
@@ -70,32 +70,36 @@ public class GameController implements MouseMotionListener
 //		BulletController bulletController = 
 				new BulletController(view,towers,enemys);
 		
-		enemyController.setPlayer(player);
-				
+		enemyController.setPlayer(player);			//Player an EnemyController übergeben
+			
 		view.addMouseMotionListener(this);
-		view.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e){
+		/**
+		 * Overrides the mouseClicked method and adds the 
+		 * setTower and the show Info functions to it
+		 */
+		view.addMouseListener(new MouseAdapter() 
+		{
+			public void mouseClicked(MouseEvent e)
+			{
 				super.mouseClicked(e);
 
-				if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
-
 				view.getGUI().clearInfo();
+				
 				/*
 				 * neuen Tower platzieren
 				 */
-				if(setTower)
-
-				{
-					if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
+					if(setTower)
 					{
-						towerController.newTower(hoveredField.x, hoveredField.y, newTowerType);
-						field[fieldX][fieldY].setOccupied(towers.get(towers.size()-1));
+						if(!field[fieldX][fieldY].isOccupied() && !field[fieldX][fieldY].isPath())
+						{
+							towerController.newTower(hoveredField.x, hoveredField.y, newTowerType);
+							field[fieldX][fieldY].setOccupied(towers.get(towers.size()-1));
+						}
+						else {
+							view.getGUI().setAttribut1("Dieses Feld ist bereits belegt");
+						}
+						setTower = false;
 					}
-					else {
-						view.getGUI().setAttribut1("Dieses Feld ist bereits belegt");
-					}
-					setTower = false;
-				}
 				/*
 				 * Info anzeigen
 				 */
@@ -165,6 +169,11 @@ public class GameController implements MouseMotionListener
 		});
 	}
 
+	/**
+	 * Show all the infos about the selected tower
+	 * in the info panel at the right side
+	 * @param tower
+	 */
 	public void setTowerInfo(Tower tower)
 	{
 		view.getGUI().setName("               "+tower.getClass().getSimpleName());
