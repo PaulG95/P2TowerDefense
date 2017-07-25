@@ -1,4 +1,4 @@
-package TowerDefenseMenue;
+package TowerDefense;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,28 +7,51 @@ import javax.swing.JButton;
 
 public class MenueController{
 
-	private MenueView view;
+	/**
+	 * This class represents the Controller for the Menue.
+	 * It contains all functions of the View.
+	 * @see MenueView
+	 * @author Vincent
+	 *
+	 */
 	
+	private static MenueView view;
+	private static boolean startgame;
+	private TowerDefenseMain tDm;
 	
-	public MenueController() {
+	/**
+	 * ActionListener and main Method
+	 *  
+	 */
+	public static void main(String[] args) {
+		
+		if(startgame = true){
+		new TowerDefenseMain();
+		}
+	}
+	
+	public MenueController(MenueView view, TowerDefenseMain tDM) {
 		// TODO Auto-generated constructor stub
+		this.tDm = new TowerDefenseMain();
 		this.view = new MenueView();
+		
+		
+		/**
+		 * This is the ActionListener
+		 * to end the game
+		 * @see MenueView
+		 * @author Vincent
+		 *
+		 */		
 		
 		view.startBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				public static void main(String[] args) {
-					new GameController();
-				}
-				
+				startgame = true;
 			}
 		});
-	
 		
-		//schlieﬂen aller Fenster
 		
 		view.exitBtn.addActionListener(new ActionListener() {
 			
@@ -51,20 +74,5 @@ public class MenueController{
 			
 		
 	}
-	
-	private JButton getStartBtn() {
-		// TODO Auto-generated method stub
-		return startBtn;
-	}
-	
-	private JButton getInstructionBtn() {
-		// TODO Auto-generated method stub
-		return instructionBtn;
-	}
-	
-	public JButton getExitBtn() {
-		return exitBtn;
-	}
-	
 	
 }
