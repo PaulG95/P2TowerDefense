@@ -18,7 +18,7 @@ public class MenueView extends JFrame{
 	 */
 	
 	JButton startBtn;
-	JButton instructionBtn;
+	JButton scoreBtn;
 	JButton exitBtn;
 	private Box menueBtns;
 	
@@ -26,27 +26,32 @@ public class MenueView extends JFrame{
 		
 		getContentPane().setBackground( Color.black );
 		
+		/**
+		 * inintialisierung der Buttons und der Box
+		 */
+		
 		startBtn = new JButton(new ImageIcon("../graphics/start_btn_V1.png"));
 		startBtn.setAlignmentX(CENTER_ALIGNMENT);
 		startBtn.setAlignmentY(TOP_ALIGNMENT);
-		startBtn.setSize(150, 50);
 		
-		instructionBtn = new JButton(new ImageIcon("../graphics/instruction_btn_V1.png"));
-		instructionBtn.setAlignmentX(CENTER_ALIGNMENT);
-		instructionBtn.setAlignmentY(CENTER_ALIGNMENT);
-		instructionBtn.setSize(150, 50);
+		scoreBtn = new JButton(new ImageIcon("../graphics/score_btn_V1.png"));
+		scoreBtn.setAlignmentX(CENTER_ALIGNMENT);
+		scoreBtn.setAlignmentY(CENTER_ALIGNMENT);
 		
 		exitBtn =  new JButton(new ImageIcon("../graphics/end_btn_V1.png"));
 		exitBtn.setAlignmentX(CENTER_ALIGNMENT);
 		exitBtn.setAlignmentY(BOTTOM_ALIGNMENT);
-		exitBtn.setSize(150, 50);
 		
 		menueBtns = Box.createVerticalBox();
+		
+		/**
+		 * hinzufügen der Buttons zur Box
+		 */
 		
 		menueBtns.add(Box.createVerticalStrut(20));
 		menueBtns.add(startBtn);
 		menueBtns.add(Box.createVerticalStrut(20));
-		menueBtns.add(instructionBtn);
+		menueBtns.add(scoreBtn);
 		menueBtns.add(Box.createVerticalStrut(20));
 		menueBtns.add(exitBtn);
 		menueBtns.add(Box.createVerticalStrut(20));
@@ -59,9 +64,20 @@ public class MenueView extends JFrame{
 		setVisible(true);	
 	}
 	
-	private void getStartBtn() {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * initialisierung der Getter-Methoden
+	 */		
+	
+	public JButton getStartBtn() {
+		return startBtn;
+	}
+	
+	public JButton getScoreBtn(){
+		return scoreBtn;
+	}
+	
+	public JButton getExitBtn(){
+		return exitBtn;
 	}
 
 }

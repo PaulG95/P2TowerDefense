@@ -20,8 +20,8 @@ public class MenueController{
 	private TowerDefenseMain tDm;
 	
 	/**
-	 * ActionListener and main Method
-	 *  
+	 * Initialisierung der Main Methode
+	 * zum Starten des Spiels
 	 */
 	public static void main(String[] args) {
 		
@@ -35,14 +35,11 @@ public class MenueController{
 		this.tDm = new TowerDefenseMain();
 		this.view = new MenueView();
 		
-		
 		/**
 		 * This is the ActionListener
-		 * to end the game
-		 * @see MenueView
-		 * @author Vincent
-		 *
+		 * change the boolean from startgame
 		 */		
+		
 		
 		view.startBtn.addActionListener(new ActionListener() {
 			
@@ -52,6 +49,10 @@ public class MenueController{
 			}
 		});
 		
+		/**
+		 * This is the ActionListener
+		 * to end the game
+		 */		
 		
 		view.exitBtn.addActionListener(new ActionListener() {
 			
@@ -63,7 +64,12 @@ public class MenueController{
 			}
 		});
 		
-		view.instructionBtn.addActionListener(new ActionListener() {
+		/**
+		 * This is the ActionListener
+		 * to show the ScoreList
+		 */		
+		
+		view.scoreBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -72,7 +78,6 @@ public class MenueController{
 			}
 		});
 			
-		
 	}
 	
 }
